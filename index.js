@@ -77,8 +77,8 @@ Toolkit.run(async tools => {
             '-B',
             '-s',
             settingsFile,
-            `-DreleaseVersion=${oldVersion}`
-            `-DdevelopmentVersion=${newVersion}`
+            `-DreleaseVersion=${oldVersion}`,
+            `-DdevelopmentVersion=${newVersion}`,
         ]);
 
         core.setOutput('tag', oldVersion);
