@@ -20,4 +20,4 @@ outputs:
     description: 'True if version was bumped'
 runs:
   using: 'node20'
-  main: 'index.js'
+  main: 'dist/index.js'
