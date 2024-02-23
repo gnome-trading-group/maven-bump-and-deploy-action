@@ -24,6 +24,18 @@ function getUpgradeType(messages) {
     return 'patch';
 }
 
+function fetchPath(obj, path) {
+    let trail = ''
+    for (const p of path) {
+        if (obj === undefined || !obj.hasOwnProperty(p)) {
+            throw `Failed to find ${p} from ${trail} when looking for version`;
+        }
+        trail += `/${p}`;
+        obj = obj[p];
+    }
+    return obj;
+}
+
 Toolkit.run(async tools => {
     const event = tools.context.payload;
     
