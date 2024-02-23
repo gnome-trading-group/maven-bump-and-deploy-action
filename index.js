@@ -14,11 +14,11 @@ async function parsePom(pomFile) {
     });
 }
 
-function getUpgradeType(messages) {
-    messages = messages.map(msg => msg.toLowerCase());
-    if (messages.some(message => message.startsWith('major:'))) {
+function getUpgradeType(message) {
+    message = message.toLowerCase();
+    if (message.startsWith('major:')) {
         return 'major';
-    } else if (messages.some(message => message.startsWith('feat:'))) {
+    } else if (message.startsWith('feat:')) {
         return 'minor';
     }
     return 'patch';
@@ -39,17 +39,15 @@ function fetchPath(obj, path) {
 Toolkit.run(async tools => {
     const event = tools.context.payload;
     
-    const pusher = event.pusher.email;
-    tools.log.info(event.pusher);
-    tools.log.info(event.commits);
-    if (pusher === 'actions@github.com') {
+    const commit = event.commits[0];
+    if (commit.author === 'actions@github.com') {
         tools.exit.success('Ignoring CI commits');
         core.setOutput('bumped', false);
         return;
     }
 
-    const messages = event.commits ? event.commits.map(commit => commit.message + '\n' + commit.body) : []
-    const upgradeType = getUpgradeType(messages);
+    const message = commit.message + '\n' + commit.body;
+    const upgradeType = getUpgradeType(message);
 
     try {
 
