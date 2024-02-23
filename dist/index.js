@@ -54460,6 +54460,8 @@ Toolkit.run(async tools => {
     const event = tools.context.payload;
     
     const pusher = event.pusher.email;
+    tools.log.info(pusher);
+    tools.log.info(event.commits);
     if (pusher === 'actions@github.com') {
         tools.exit.success('Ignoring CI commits');
         core.setOutput('bumped', false);
