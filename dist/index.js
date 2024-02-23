@@ -54438,7 +54438,7 @@ function getUpgradeType(messages) {
     messages = messages.map(msg => msg.toLowerCase());
     if (messages.some(message => message.startsWith('major:'))) {
         return 'major';
-    } else if (messages.som(message => message.startsWith('feat:'))) {
+    } else if (messages.some(message => message.startsWith('feat:'))) {
         return 'minor';
     }
     return 'patch';
@@ -54497,6 +54497,7 @@ Toolkit.run(async tools => {
     }
     tools.exit.success('Version bumped and deployed successfully.');
 });
+
 })();
 
 module.exports = __webpack_exports__;
