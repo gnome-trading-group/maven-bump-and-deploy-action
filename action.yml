@@ -1,0 +1,23 @@
+name: Automated Maven Bump and Deploy
+description: Automated Maven Bump and Deploy
+inputs:
+  pom-file:
+    description: 'Location of the pom file'
+    default: 'pom.xml'
+    required: false
+  settings-file:
+    description: 'Location of the settings files'
+    default: 'settings.xml'
+    required: false
+  version-path:
+    description: 'Path to version in pom xml file'
+    default: '/project/version'
+    required: false
+outputs:
+  tag:
+    description: 'The tag which was just created'
+  bumped:
+    description: 'True if version was bumped'
+runs:
+  using: 'node20'
+  main: 'index.js'
