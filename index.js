@@ -60,7 +60,7 @@ Toolkit.run(async tools => {
         const versionPath = core.getInput('version-path');
 
         const pom = await parsePom(pomFile);
-        const oldVersion = fetchPath(pom.pomObject, versionPath.split('/').filter(f => f.length > 0));
+        let oldVersion = fetchPath(pom.pomObject, versionPath.split('/').filter(f => f.length > 0));
         if (oldVersion.includes('-SNAPSHOT')) {
             oldVersion = oldVersion.split('-', 1)[0];
         }
