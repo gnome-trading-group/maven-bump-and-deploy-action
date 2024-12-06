@@ -18,6 +18,10 @@ The location of the `settings.xml` file. Default `"settings.xml"`.
 
 The location of the `<version>` tag within `pom.xml`. Default `project/version`.
 
+### `push-changes`
+
+Boolean flag to push changes to git repo or not. Default `true`.
+
 ## Outputs
 
 ### `tag`

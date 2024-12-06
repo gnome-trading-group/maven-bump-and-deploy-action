@@ -58,6 +58,7 @@ Toolkit.run(async tools => {
         const pomFile = core.getInput('pom-file');
         const settingsFile = core.getInput('settings-file');
         const versionPath = core.getInput('version-path');
+        const pushChanges = core.getInput('push-changes');
 
         const pom = await parsePom(pomFile);
         let oldVersion = fetchPath(pom.pomObject, versionPath.split('/').filter(f => f.length > 0));
@@ -79,6 +80,7 @@ Toolkit.run(async tools => {
             settingsFile,
             `-DreleaseVersion=${oldVersion}`,
             `-DdevelopmentVersion=${newVersion}`,
+            `-DpushChanges=${pushChanges}`,
         ]);
 
         core.setOutput('tag', oldVersion);

@@ -13,6 +13,10 @@ inputs:
     description: 'Path to version in pom xml file'
     default: '/project/version'
     required: false
+  push-changes:
+    description: 'Boolean flag to push changes to git repo'
+    default: true
+    required: false
 outputs:
   tag:
     description: 'The tag which was just created'
