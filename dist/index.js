@@ -41539,6 +41539,7 @@ Toolkit.run(async (tools) => {
     const settingsFile = core.getInput("settings-file");
     const versionPath = core.getInput("version-path");
     const pushChanges = core.getInput("push-changes");
+    const additionalArgs = core.getInput("additional-args");
     const pom = await parsePom(pomFile);
     let oldVersion = fetchPath(pom.pomObject, versionPath.split("/").filter((f) => f.length > 0));
     if (oldVersion.includes("-SNAPSHOT")) {
@@ -41556,7 +41557,8 @@ Toolkit.run(async (tools) => {
       settingsFile,
       `-DreleaseVersion=${oldVersion}`,
       `-DdevelopmentVersion=${newVersion}`,
-      `-DpushChanges=${pushChanges}`
+      `-DpushChanges=${pushChanges}`,
+      additionalArgs
     ]);
     core.setOutput("tag", oldVersion);
     core.setOutput("bumped", true);

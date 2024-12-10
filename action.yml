@@ -17,6 +17,10 @@ inputs:
     description: 'Boolean flag to push changes to git repo'
     default: true
     required: false
+  additional-args:
+    description: 'Additional arguments to pass into mvn command line'
+    default: ''
+    required: false
 outputs:
   tag:
     description: 'The tag which was just created'

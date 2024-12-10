@@ -22,6 +22,10 @@ The location of the `<version>` tag within `pom.xml`. Default `project/version`.
 
 Boolean flag to push changes to git repo or not. Default `true`.
 
+### `additional-args`
+
+Additional arguments to pass into the `mvn` command. Default `""`.
+
 ## Outputs
 
 ### `tag`
