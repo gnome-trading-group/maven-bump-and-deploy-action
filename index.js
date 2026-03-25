@@ -66,9 +66,10 @@ Toolkit.run(async tools => {
         if (oldVersion.includes('-SNAPSHOT')) {
             oldVersion = oldVersion.split('-', 1)[0];
         }
-        const newVersion = semver.inc(oldVersion, upgradeType) + '-SNAPSHOT';
+        const releaseVersion = upgradeType === 'patch' ? oldVersion : semver.inc(oldVersion, upgradeType);
+        const newVersion = semver.inc(releaseVersion, 'patch') + '-SNAPSHOT';
 
-        tools.log.info(`Bumping version from ${oldVersion} to ${newVersion}.`);
+        tools.log.info(`Bumping version from ${oldVersion} to ${releaseVersion}, next dev version ${newVersion}.`);
 
         await tools.exec('git', ['config', 'user.email', '"actions@github.com"']);
         await tools.exec('git', ['config', 'user.name', '"GitHub Actions"']);
@@ -79,13 +80,13 @@ Toolkit.run(async tools => {
             '-B',
             '-s',
             settingsFile,
-            `-DreleaseVersion=${oldVersion}`,
+            `-DreleaseVersion=${releaseVersion}`,
             `-DdevelopmentVersion=${newVersion}`,
             `-DpushChanges=${pushChanges}`,
             additionalArgs,
         ]);
 
-        core.setOutput('tag', oldVersion);
+        core.setOutput('tag', releaseVersion);
         core.setOutput('bumped', true); 
     } catch (e) {
         tools.log.fatal(e)
