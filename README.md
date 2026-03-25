@@ -36,6 +36,28 @@ The tag which was created.
 
 Boolean value if the version was bumped. This script will ignore commits from itself to not create an infinite loop.
 
+## Releasing
+
+To publish a new version of this action:
+
+1. Build the bundle:
+   ```sh
+   npm run build
+   ```
+
+2. Commit the built `dist/index.js` (required — GitHub Actions reads it directly from the repo):
+   ```sh
+   git add dist/index.js
+   git commit -m "build: bundle for release"
+   ```
+
+3. Tag and push:
+   ```sh
+   git tag v1.0.15
+   git push origin master
+   git push origin v1.0.15
+   ```
+
 ## Example usage
 
 ```yaml
