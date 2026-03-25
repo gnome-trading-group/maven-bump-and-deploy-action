@@ -41559,7 +41559,7 @@ Toolkit.run(async (tools) => {
       `-DreleaseVersion=${releaseVersion}`,
       `-DdevelopmentVersion=${newVersion}`,
       `-DpushChanges=${pushChanges}`,
-      additionalArgs
+      ...additionalArgs ? additionalArgs.split(/\s+/) : []
     ]);
     core.setOutput("tag", releaseVersion);
     core.setOutput("bumped", true);
